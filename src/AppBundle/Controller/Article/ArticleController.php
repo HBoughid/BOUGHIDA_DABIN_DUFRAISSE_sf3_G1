@@ -11,28 +11,35 @@ namespace AppBundle\Controller\Article;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
-
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
 
 
 
 class ArticleController extends Controller
 {
-    public function listAction()
-    {
-
-    }
 
     /**
-     * @Route("/{id}")
+     * @Route("/{id}", requirements={"id" = "\id+"})
      *
      * @param $id
      *
      * @return Response
      */
-    public function showAction($id)
+    public function showAction($id, Resquest $request)
     {
-        return new Response('Article avec l\'id '.$id);
+        $tag = $request->query->get('tag');
 
+        return new Response('Article avec l\'id '.$id.' avec le tag '.$tag);
+    }
+
+    /**
+     * *@Route("/list")
+     */
+
+    public function listAction()
+    {
+        return new Response('list of article');
     }
 
 }
