@@ -9,6 +9,9 @@
 namespace AppBundle\Controller\Article;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Routing\Annotation\Route;
+
+
 
 
 class ArticleController extends Controller
@@ -17,4 +20,16 @@ class ArticleController extends Controller
     {
         
     }
+
+    /**
+     * @Route("/{id}")
+     *
+     * @param $id
+     */
+
+    public function showAction($id)
+    {
+
+    }
+
 }
