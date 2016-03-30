@@ -26,21 +26,16 @@ class ArticleController extends Controller
      * @Route("/{id}")
      *
      * @param $id
-     */
-    public function showAction($id)
-    {
-
-    }
-
-    /**
-     * @Route("/{id}")
      *
-     * @param $id
+     * @return Response
      */
-
     public function showAction($id)
     {
+        return new Response('Article avec l\'id '.$id);
 
     }
+
+
+
 
 }
