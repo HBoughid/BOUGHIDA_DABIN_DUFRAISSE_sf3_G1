@@ -8,7 +8,7 @@
 
 namespace AppBundle\Controller\Article;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -34,8 +34,5 @@ class ArticleController extends Controller
         return new Response('Article avec l\'id '.$id);
 
     }
-
-
-
 
 }
