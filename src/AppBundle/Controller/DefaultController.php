@@ -9,9 +9,8 @@ use Symfony\Component\Routing\Annotation\Route;
 class DefaultController extends Controller
 {
     /**
-     * @Route()
+     * @Route("/")
      */
-
     public function indexAction()
     {
         return new Response("Hello World !");
