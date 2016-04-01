@@ -1,6 +1,8 @@
 <?php
 namespace AppBundle\Controller\Article;
 use AppBundle\Entity\Article\Article;
+use AppBundle\Form\Article\ArticleType;
+use AppBundle\Repository\Article\ArticleRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -26,32 +28,28 @@ class ArticleController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $articleRepository = $em->getRepository('AppBundle:Article\Article');
-
-        $author = "moi";
-
+        $author = 'moi';
         $articles = $articleRepository->findBy([
             'author' => $author
         ]);
-
         dump($articles);
-
         return new Response('List of article');
     }
     /**
      * @Route("/new", name="article_new")
      */
-    public function newAction()
+    public function newAction(Request $request)
     {
-        $em = $this->getDoctrine()->getManager();
-        $article = new Article();
-        $article
-            ->setTitle('Osef du titre')
-            ->setContent('blabla bla')
-            ->setTag('osef')
-            ->setCreatedAt(new \DateTime())
-        ;
-        $em->persist($article);
-        $em->flush();
-        return new Response('Article created');
+        $form = $this->createForm(ArticleType::class);
+        $form->handleRequest($request);
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($form->getData());
+            $em->flush();
+            return $this->redirectToRoute('article_list');
+        }
+        return $this->render('AppBundle:Article:new.html.twig', [
+            'form' => $form->createView(),
+        ]);
     }
 }
