@@ -1,6 +1,10 @@
-<p>List of tutorials:</p>
+<h2>Articles</h2>
 <ul>
-    {% for tutorial in tutorials %}
-        <li>id: {{ tutorial.id }} nom: {{ tutorial.name }}</li>
+    {% for article in articles %}
+        <li>
+            <h3>{{ article.title }}</h3>
+            {{ article.createdAt|date ('m \d \Y H:i') }}
+            <a href="{{ path('article_list' , {'tag' : article.tag}) }}"></a>
+        </li>
     {% endfor %}
 </ul>
