@@ -1,3 +1,13 @@
 body {
-    background: pink;
+     background: white;
+ }
+
+header{
+    background: blue;
+    color:red;
 }
+
+h1{
+    color:white;
+}
+

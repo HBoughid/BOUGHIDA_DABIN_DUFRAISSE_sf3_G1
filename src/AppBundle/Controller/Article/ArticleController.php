@@ -32,7 +32,7 @@ class ArticleController extends Controller
         $articles = $articleRepository->findBy([
             'author' => $author
         ]);
-        dump($articles);
+        //dump($articles);
         return new Response('List of article');
     }
     /**
