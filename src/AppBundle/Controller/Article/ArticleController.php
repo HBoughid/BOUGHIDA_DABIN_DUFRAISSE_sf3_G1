@@ -24,7 +24,7 @@ class ArticleController extends Controller
     /**
      * @Route("/list", name="article_list")
      */
-    public function listAction()
+    /**public function listAction()
     {
         $em = $this->getDoctrine()->getManager();
         $articleRepository = $em->getRepository('AppBundle:Article\Article');
@@ -34,7 +34,19 @@ class ArticleController extends Controller
         ]);
         //dump($articles);
         return new Response('List of article');
+    }*/
+    public function listAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $articleRepository = $em->getRepository('AppBundle:Article\Article');
+        $articles = $articleRepository->findAll();
+        // dump($articles);die;
+        return $this->render('AppBundle:Home:index.html.twig', [
+            'articles' => $articles,
+        ]);
+
     }
+
     /**
      * @Route("/new", name="article_new")
      */

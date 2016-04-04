@@ -7,7 +7,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class HomeController extends Controller
 {
     /**
-     * @Route("/")
+     * @Route("/ ")
      */
     public function indexAction()
     {
