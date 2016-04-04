@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+
 class ArticleController extends Controller
 {
     /**
@@ -21,30 +22,32 @@ class ArticleController extends Controller
         $tag = $request->query->get('tag');
         return new Response('Article avec l\'id '.$id.' avec le tag: '.$tag);
     }
+
     /**
      * @Route("/list", name="article_list")
      */
-    /**public function listAction()
+    public function listAction(Request $request)
     {
-        $em = $this->getDoctrine()->getManager();
-        $articleRepository = $em->getRepository('AppBundle:Article\Article');
-        $author = 'moi';
-        $articles = $articleRepository->findBy([
-            'author' => $author
-        ]);
-        //dump($articles);
-        return new Response('List of article');
-    }*/
-    public function listAction()
-    {
-        $em = $this->getDoctrine()->getManager();
-        $articleRepository = $em->getRepository('AppBundle:Article\Article');
-        $articles = $articleRepository->findAll();
-        // dump($articles);die;
-        return $this->render('AppBundle:Home:index.html.twig', [
-            'articles' => $articles,
-        ]);
-
+        $tag = $request->query->get('tag');
+        if ($tag == "") {
+            $em = $this->getDoctrine()->getManager();
+            $articleRepository = $em->getRepository('AppBundle:Article\Article');
+            $articles = $articleRepository->findBy(array(), array('createdAt' => 'DESC'));
+            return $this->render('AppBundle:Home:index.html.twig', [
+                'articles' => $articles,
+            ]);
+        } else {
+            $em = $this->getDoctrine()->getManager();
+            $articleRepository = $em->getRepository('AppBundle:Article\Article');
+            $tag = $request->query->get('tag');
+            $articles = $articleRepository->findBy([
+                'tag' => $tag,
+            ]);
+            return $this->render('AppBundle:Home:index.html.twig', [
+                'articles' => $articles,
+                'tag' => $tag,
+            ]);
+        }
     }
 
     /**

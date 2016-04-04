@@ -52,7 +52,7 @@ class Article
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="createdAt", type="datetime")
+     * @ORM\Column(name="createdAt", type="datetime", nullable=true)
      */
     private $createdAt;
 
@@ -217,5 +217,13 @@ class Article
     {
         return $this->updatedAt;
     }
+
+    public function __construct()
+    {
+        $this->date = new \Datetime();
+
+    }
 }
+
+
 

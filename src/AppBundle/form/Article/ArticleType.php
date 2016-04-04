@@ -22,6 +22,8 @@ class ArticleType extends AbstractType
         $builder
             ->add('title')
             ->add('content')
+            ->add('author')
+            ->add('tag')
             ->add('save', SubmitType::class)
             ;
     }
