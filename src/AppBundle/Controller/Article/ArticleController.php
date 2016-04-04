@@ -17,10 +17,14 @@ class ArticleController extends Controller
      *
      * @return Response
      */
-    public function showAction($id, Request $request)
+    public function showAction($id)
     {
-        $tag = $request->query->get('tag');
-        return new Response('Article avec l\'id '.$id.' avec le tag: '.$tag);
+        $em = $this->getDoctrine()->getManager();
+        $articleRepository = $em->getRepository('AppBundle:Article\Article');
+        $article = $articleRepository->find($id);
+        return $this->render('AppBundle:Article:single.html.twig', [
+            'article' => $article,
+        ]);
     }
 
     /**

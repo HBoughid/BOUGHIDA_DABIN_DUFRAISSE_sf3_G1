@@ -1,0 +1,36 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}
+    {{ parent() ~ ' - Home' }}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    {{ parent() }}
+
+    <div class="row">
+        <div class="jumbotron">
+            <h1>{{ article.title }}</h1>
+            <p>{{ article.content }}</p>
+            {% if(article.tag == "") %}
+                <p>Tag: <span style="color:#1736ff;">Pas de tag</span></p>
+            {% else %}
+                <p>tag: <a href="{{ path('article_list', {'tag': article.tag}) }}" class="btn btn-primary" role="button">{{ article.tag }}</a></p>
+            {% endif %}
+            {% if(article.author == "") %}
+                <p class="text-left">Auteur: <span style="color:#1736ff;">Pas d'auteur</span></p>
+            {% else %}
+                <p class="text-left">Auteur: {{ article.author }}</p>
+            {% endif %}
+            <p class="pull-right">{{ article.createdAt | date('m/d/Y H:i') }}</p>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}
